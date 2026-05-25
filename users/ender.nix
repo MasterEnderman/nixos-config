@@ -46,7 +46,6 @@
 
         # --- applications ---
         ghostwriter.enable    = true;
-        onlyoffice.enable     = false;
         prism-launcher.enable = true;
 
         # --- git and ssh ---
