@@ -77,7 +77,7 @@
 		      builtins.concatMap (entry:
 		        let
 		          fullPath = "${path}/${entry}";
-		          t = builtins.readFileType fullPath;
+		          t = if builtins.pathExists fullPath then builtins.readFileType fullPath else "absent";
 		        in
 		        if t == "directory" then recurse fullPath
 		        else if t == "regular" && builtins.match ".\*\\\.nix\$" entry != null
