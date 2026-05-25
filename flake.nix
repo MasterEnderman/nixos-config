@@ -50,6 +50,8 @@
       url = "github:3timeslazy/nix-search-tv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    inputs.import-tree.url = "github:denful/import-tree";
   };
 
   outputs = {
@@ -65,6 +67,7 @@
     chaotic,
     sops-nix,
     nix-search-tv,
+    import-tree,
     ...
   }:
   let
