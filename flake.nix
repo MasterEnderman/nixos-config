@@ -72,7 +72,7 @@
 		importModules = dir:
 		  let
 		    entries = builtins.readDir dir;
-		    sorted = builtins.sort (a: b: lib.strings.compare a b) (builtins.attrNames entries);
+		    sorted = builtins.sort (a: b: lib.trivial.compare a b) (builtins.attrNames entries);
 		    recurse = path:
 		      builtins.concatMap (entry:
 		        let
