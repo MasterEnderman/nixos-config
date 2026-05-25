@@ -5,47 +5,49 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url    = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix = {
-      url    = "github:danth/stylix";
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     niri = {
-      url                   = "github:sodiboo/niri-flake";
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
-      url                   = "github:youwen5/zen-browser-flake";
+      url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nur = {
-      url                   = "github:nix-community/nur";
+      url = "github:nix-community/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     disko = {
-      url                   = "github:nix-community/disko";
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     preservation.url = "github:nix-community/preservation";
 
     chaotic = {
-      url                   = "github:chaotic-cx/nyx";
+      url = "github:chaotic-cx/nyx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
-      url                   = "github:mic92/sops-nix";
+      url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-search-tv = {
-      url                   = "github:3timeslazy/nix-search-tv";
+      url = "github:3timeslazy/nix-search-tv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -68,45 +70,29 @@
   let
     lib = nixpkgs.lib;
 
-    # Recursive module importer: only import regular files ending with .nix
-		importModules = dir:
-		  let
-		    entries = builtins.readDir dir;
-		    sorted = builtins.sort (a: b: a < b) (builtins.attrNames entries);
-		    recurse = path:
-		      builtins.concatMap (entry:
-		        let
-		          fullPath = "${path}/${entry}";
-		          t = if builtins.pathExists fullPath then builtins.readFileType fullPath else "absent";
-		        in
-		        if t == "directory" then recurse fullPath
-		        else if t == "regular" && builtins.match ".\*\\\.nix\$" entry != null
-		        then [ import fullPath ]
-		        else []
-		      ) (sorted);
-		  in
-		  recurse dir;
-		
-		hosts = builtins.attrNames (
-		  lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./hosts)
-		);
-		
-		mkHost = hostname: lib.nixosSystem {
-		  system = "x86_64-linux";
-		  specialArgs = { inherit zen-browser nix-search-tv; };
-		  modules = [
-		    ./hosts/${hostname}
-		    home-manager.nixosModules.home-manager
-		    stylix.nixosModules.stylix
-		    niri.nixosModules.niri
-		    disko.nixosModules.disko
-		    preservation.nixosModules.preservation
-		    chaotic.nixosModules.default
-		    sops-nix.nixosModules.sops
-		    { nixpkgs.overlays = [ nur.overlays.default ]; }
-		    ./users/ender.nix
-		  ] ++ (importModules ./modules);
-		};
+    importModules = dir:
+      map import (lib.filter (lib.hasSuffix ".nix") (lib.filesystem.listFilesRecursive dir));
+
+    hosts = builtins.attrNames (
+      lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./hosts)
+    );
+
+    mkHost = hostname: lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit zen-browser nix-search-tv; };
+      modules = [
+        ./hosts/${hostname}
+        home-manager.nixosModules.home-manager
+        stylix.nixosModules.stylix
+        niri.nixosModules.niri
+        disko.nixosModules.disko
+        preservation.nixosModules.preservation
+        chaotic.nixosModules.default
+        sops-nix.nixosModules.sops
+        { nixpkgs.overlays = [ nur.overlays.default ]; }
+        ./users/ender.nix
+      ] ++ (importModules ./modules);
+    };
   in
   {
     nixosConfigurations = builtins.listToAttrs (
