@@ -51,7 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    inputs.import-tree.url = "github:denful/import-tree";
+    import-tree.url = "github:denful/import-tree";
   };
 
   outputs = {
