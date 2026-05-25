@@ -105,7 +105,7 @@
 		    sops-nix.nixosModules.sops
 		    { nixpkgs.overlays = [ nur.overlays.default ]; }
 		    ./users/ender.nix
-		  ] ++ (importModules ./modules/nixos);
+		  ] ++ (importModules ./modules);
 		};
   in
   {
