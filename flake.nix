@@ -76,7 +76,7 @@
 		    recurse = path:
 		      builtins.concatMap (entry:
 		        let
-		          fullPath = "\${path}/\${entry}";
+		          fullPath = "${path}/${entry}";
 		          t = builtins.readFileType fullPath;
 		        in
 		        if t == "directory" then recurse fullPath
@@ -92,10 +92,10 @@
 		);
 		
 		mkHost = hostname: lib.nixosSystem {
-		  system = "x86\_64-linux";
+		  system = "x86_64-linux";
 		  specialArgs = { inherit zen-browser nix-search-tv; };
 		  modules = [
-		    ./hosts/\${hostname}
+		    ./hosts/${hostname}
 		    home-manager.nixosModules.homeManager
 		    stylix.nixosModules.stylix
 		    niri.nixosModules.niri
