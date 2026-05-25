@@ -82,7 +82,7 @@
 
     mkHost = hostname: lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit zen-browser nix-search-tv; };
+      specialArgs = { inherit import-tree zen-browser nix-search-tv; };
       modules = [
         ./hosts/${hostname}
         home-manager.nixosModules.home-manager
