@@ -13,10 +13,6 @@
       systemd-boot.enable      = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.luks.devices.cryptroot = {
-      device        = "/dev/nvme0n1p2";
-      allowDiscards = true;
-    };
   };
 
   fileSystems."/persist".neededForBoot = true;
