@@ -11,7 +11,7 @@
       window-rules = [
         # steam dialogs float automatically
         {
-          matches              = [{ app-id = "steam"; is-dialog = true; }];
+          matches              = [{ app-id = "steam"; is-floating = true; }];
           default-column-width = {};
           open-floating        = true;
         }
