@@ -6,7 +6,7 @@
 
   config = lib.mkIf config.my.home.jetbrains.enable {
     home.packages = with pkgs; [
-      jetbrains.idea-community
+      jetbrains.idea-oss
       temurin-bin-8
       temurin-bin-17
       temurin-bin-21
