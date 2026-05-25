@@ -93,7 +93,7 @@
         sops-nix.nixosModules.sops
         { nixpkgs.overlays = [ nur.overlays.default ]; }
         ./users/ender.nix
-      ] ++ (builtins.attrValues (inputs.import-tree ./modules/nixos));
+      ] ++ (builtins.attrValues (import-tree ./modules/nixos));
     };
   in
   {
