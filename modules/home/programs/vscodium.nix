@@ -22,8 +22,6 @@
         esbenp.prettier-vscode
       ];
       userSettings = {
-        "editor.fontFamily"                   = "monospace";
-        "editor.fontSize"                     = 14;
         "editor.formatOnSave"                 = true;
         "editor.minimap.enabled"              = false;
         "workbench.startupEditor"             = "none";
