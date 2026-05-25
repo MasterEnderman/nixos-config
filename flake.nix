@@ -50,8 +50,6 @@
       url = "github:3timeslazy/nix-search-tv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    import-tree.url = "github:denful/import-tree";
   };
 
   outputs = {
@@ -67,7 +65,6 @@
     chaotic,
     sops-nix,
     nix-search-tv,
-    import-tree,
     ...
   }:
   let
@@ -82,7 +79,7 @@
 
     mkHost = hostname: lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit import-tree zen-browser nix-search-tv; };
+      specialArgs = { inherit zen-browser nix-search-tv; };
       modules = [
         ./hosts/${hostname}
         home-manager.nixosModules.home-manager
