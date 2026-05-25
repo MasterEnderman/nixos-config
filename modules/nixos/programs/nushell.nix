@@ -6,6 +6,6 @@
   };
 
   config = lib.mkIf config.my.nixos.nushell.enable {
-    programs.nushell.enable = true;
+    programs.bash.enable = true;
   };
 }
