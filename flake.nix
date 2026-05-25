@@ -96,7 +96,7 @@
 		  specialArgs = { inherit zen-browser nix-search-tv; };
 		  modules = [
 		    ./hosts/${hostname}
-		    home-manager.nixosModules.homeManager
+		    home-manager.nixosModules.home-manager
 		    stylix.nixosModules.stylix
 		    niri.nixosModules.niri
 		    disko.nixosModules.disko
