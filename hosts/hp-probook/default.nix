@@ -23,7 +23,7 @@
 
   stylix = {
     enable       = true;
-    image        = ./wallpaper.jpg;
+    image        = ./wallpaper.png;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     fonts        = {
       monospace = {
