@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, nix-search-tv, zen-browser, ... }:
 
 {
   users.users.ender = {
@@ -11,6 +11,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs = { inherit nix-search-tv zen-browser; };
     users.ender = {
       my.home = {
         # --- shell ---
