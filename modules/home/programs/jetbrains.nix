@@ -1,4 +1,4 @@
-
+{ pkgs, config, lib, ... }:
 {
   options.my.home.jetbrains = {
     enable = lib.mkEnableOption "intellij idea";
