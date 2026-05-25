@@ -7,7 +7,7 @@
 
   config = lib.mkIf config.my.home.ghostwriter.enable {
     home.packages = [
-      pkgs.ghostwriter
+      pkgs.kdePackages.ghostwriter
       pkgs.pandoc
     ];
   };
