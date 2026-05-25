@@ -48,8 +48,6 @@
       url                   = "github:3timeslazy/nix-search-tv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    import-tree.url = "github:vic/import-tree";
   };
 
   outputs = {
@@ -65,11 +63,32 @@
     chaotic,
     sops-nix,
     nix-search-tv,
-    import-tree,
     ...
   }:
   let
     lib = nixpkgs.lib;
+
+    # --- Recursive module importer (replaces import-tree) ---
+    importModules = dir:
+      let
+        entries = builtins.readDir dir;
+        recurse = path:
+          builtins.concatMap
+            (entry:
+              let
+                fullPath = path + "/" + entry;
+                entryType = builtins.readFileType fullPath;
+              in
+              if entryType == "directory"
+              then recurse fullPath
+              else if builtins.match ".*\\.nix$" entry != null
+              then [ (import fullPath) ]
+              else []
+            )
+            (builtins.attrNames entries);
+      in
+      recurse dir;
+    # -------------------------------------------------------------
 
     # every subdirectory under hosts/ becomes a nixosConfiguration
     # automatically — no manual registration needed
@@ -81,7 +100,7 @@
 
     mkHost = hostname: lib.nixosSystem {
       system     = "x86_64-linux";
-      specialArgs = { inherit import-tree zen-browser nix-search-tv; };
+      specialArgs = { inherit zen-browser nix-search-tv; }; # REMOVED: import-tree
       modules    = [
         ./hosts/${hostname}
         home-manager.nixosModules.homeManager
@@ -93,7 +112,7 @@
         sops-nix.nixosModules.sops
         { nixpkgs.overlays = [ nur.overlays.default ]; }
         ./users/ender.nix
-      ] ++ (builtins.attrValues (import-tree ./modules/nixos));
+      ] ++ (importModules ./modules/nixos); # FIXED: No attrValues needed, already returns list
     };
   in
   {
