@@ -56,7 +56,6 @@
     # --- system ---
     greetd.enable       = true;
     impermanence.enable = true;
-    hyprlock.enable     = true;
     sops.enable         = true;
     polkit.enable       = true;
     brightness.enable   = true;
