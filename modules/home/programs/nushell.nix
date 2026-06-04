@@ -10,7 +10,7 @@
       enable       = true;
       shellAliases = {
         # system rebuild
-        rebuild       = "sudo nixos-rebuild switch --flake github:ender/nixos-config";
+        rebuild       = "sudo nixos-rebuild switch --flake github:masterenderman/nixos-config";
         rebuild-local = "sudo nixos-rebuild switch --flake .";
 
         # workflow
