@@ -52,7 +52,7 @@
         "Mod+8".action.focus-workspace = 8;
         "Mod+9".action.focus-workspace = 9;
 
-        "Mod+Escape".action.spawn = [ "hyprlock" ];
+        # "Mod+Escape".action.spawn = [ "hyprlock" ];
 
         # --- system and media keys ---
         "XF86AudioPlay".action.spawn         = [ "playerctl" "play-pause" ];
@@ -72,12 +72,12 @@
         "Mod+Shift+Space".action.spawn  = [ "fuzzel" ];
         "Mod+Shift+S".action.spawn      = [ "grimblast" "copy" "area" ];
         "Mod+Shift+F".action.spawn      = [ "grimblast" "copy" "screen" ];
-        "Mod+Shift+V".action.spawn      = [ "cliphist-fuzzel" ];
+        # "Mod+Shift+V".action.spawn      = [ "cliphist-fuzzel" ];
         "Mod+Shift+P".action.spawn      = [ "foot" "-e" "pulsemixer" ];
         "Mod+Shift+B".action.spawn      = [ "foot" "-e" "btop" ];
         "Mod+Shift+G".action.spawn      = [ "foot" "-e" "lazygit" ];
         "Mod+Shift+Period".action.spawn = [ "emote" ];
-        "Mod+Shift+Slash".action.spawn  = [ "foot" "-e" "tv" "nix" ];
+        "Mod+Shift+N".action.spawn  = [ "foot" "-e" "tv" "nix" ];
 
         # --- special launches ---
         "Mod+Shift+Alt+S".action.spawn      = [ "grimblast" "save" "area" ];
