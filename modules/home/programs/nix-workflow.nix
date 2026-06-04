@@ -60,7 +60,7 @@
           # switch
           print "switching system..."
           let switch = (do {
-            sudo nixos-rebuild switch --flake github:ender/nixos-config
+            sudo nixos-rebuild switch --flake github:masterenderman/nixos-config
           } | complete)
           if $switch.exit_code != 0 {
             print "switch failed — run 'rebuild' manually to retry"
@@ -110,7 +110,7 @@
           # switch
           print "switching system..."
           let switch = (do {
-            sudo nixos-rebuild switch --flake github:ender/nixos-config
+            sudo nixos-rebuild switch --flake github:masterenderman/nixos-config
           } | complete)
           if $switch.exit_code != 0 {
             print "switch failed — run 'rebuild' manually to retry"
