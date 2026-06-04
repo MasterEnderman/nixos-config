@@ -39,8 +39,8 @@
         "Mod+F".action.fullscreen-window   = {};
         "Mod+M".action.maximize-column     = {};
 
-        "Mod+Comma".action.focus-workspace-previous = {};
-        "Mod+Period".action.focus-workspace-next    = {};
+        "Mod+Comma".action.focus-workspace-up = {};
+				"Mod+Period".action.focus-workspace-down = {};
 
         "Mod+1".action.focus-workspace = 1;
         "Mod+2".action.focus-workspace = 2;
