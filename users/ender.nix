@@ -21,9 +21,7 @@
         # --- desktop ---
         noctalia.enable = true;
         niri.enable = true;
-        hyprlock.enable = true;
         stylix.enable = true;
-        fuzzel.enable = true;
         grimblast.enable = true;
         imv.enable = true;
         emote.enable = true;
